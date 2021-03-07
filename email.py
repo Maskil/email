@@ -435,18 +435,18 @@ def mail():
             part['Content-Disposition'] = 'attachment; filename="%s"' % basename(location)
             msg.attach(part)
         print('Successfully created all attachments.')
-    print("waiting for sending")
-    answer = input("Do you want to send the email now? Enter Y for yes and N for setting a time.")
-    if (answer == "Y" or answer == "y"):
-        smtpObj.sendmail('EMAIL@gmail.com', recipientList, msg.as_string())
-        smtpObj.quit()
-        print("sent")
-    elif (answer == "N" or answer == "n"):
-        hour = input("hour: ")
-        minute = input("minute: ")
-        second = input("second: ")
-        while (True):
-            # Main
+    print("waiting to send")
+    while True:
+        answer = input("Y: Send Now.\n T: set a time\n R: set a duration for repeating")
+        if answer == "Y" or answer == "y":
+            smtpObj.sendmail('EMAIL@gmail.com', recipientList, msg.as_string())
+            smtpObj.quit()
+            print("sent")
+            break
+        elif answer == "T" or answer == "t":
+            hour = input("hour: ")
+            minute = input("minute: ")
+            second = input("second: ")
             now_time = datetime.datetime.now()
             next_year = now_time.date().year
             next_month = now_time.date().month
@@ -455,21 +455,28 @@ def mail():
                 str(next_year) + "-" + str(next_month) + "-" + str(next_day) + " " + hour + ":" + minute + ":" + second,
                 "%Y-%m-%d %H:%M:%S")
             timer_start_time = (next_time - now_time).total_seconds()
-            print(str(round(timer_start_time, 2)) + " seconds left.")
+            print(str(round(timer_start_time/3600, 2)) + " hours left.")
             print("target: " + str(next_time))
             if timer_start_time > 0:
                 time.sleep(timer_start_time)
                 smtpObj.sendmail('EMAIL@gmail.com', recipientList, msg.as_string())
-                smtpObj.quit()
-                answer = input("Sent. Do you want to send it repeatedly?")
-                if (answer == "Y" or answer == "y"):
-                    print('Answer in integers')
-                    hour = int(input('hour: '))
-                    minute = int(input('minute: '))
-                    print('Command received. Do not close the window.')
-                    time.sleep(hour*3600+minue*60)
-                else:
-                    break
+                smtpObj.quit()   
+                break
+            else:
+                continue
+        elif answer == 'R' or answer == 'r':
+            print('Answer in integers')
+            hour = int(input('hour: '))
+            minute = int(input('minute: '))
+            print('Command received. Do not close the window.')
+            while True:
+                time.sleep(hour * 3600 + minue * 60)
+                smtpObj.sendmail('EMAIL@gmail.com', recipientList, msg.as_string())
+                print('Sent')
+        else:
+            continue
+            
+            
 dirct = os.getcwd()
 print('Your current directory is: ' + str(dirct))
 qs = ynAnswer('Do you want to change your directory address? Y/N.\n')
