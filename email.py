@@ -437,7 +437,7 @@ def mail():
         print('Successfully created all attachments.')
     print("waiting to send")
     while True:
-        answer = input("Y: Send Now.\n T: set a time\n R: set a duration for repeating")
+        answer = input("Y: Send Now.\nT: set a time\nR: set a duration for repeating")
         if answer == "Y" or answer == "y":
             smtpObj.sendmail('EMAIL@gmail.com', recipientList, msg.as_string())
             smtpObj.quit()
@@ -460,7 +460,7 @@ def mail():
             if timer_start_time > 0:
                 time.sleep(timer_start_time)
                 smtpObj.sendmail('EMAIL@gmail.com', recipientList, msg.as_string())
-                smtpObj.quit()   
+                smtpObj.quit()
                 break
             else:
                 continue
@@ -470,13 +470,13 @@ def mail():
             minute = int(input('minute: '))
             print('Command received. Do not close the window.')
             while True:
-                time.sleep(hour * 3600 + minue * 60)
+                time.sleep(hour * 3600 + minute * 60)
                 smtpObj.sendmail('EMAIL@gmail.com', recipientList, msg.as_string())
                 print('Sent')
         else:
             continue
-            
-            
+
+
 dirct = os.getcwd()
 print('Your current directory is: ' + str(dirct))
 qs = ynAnswer('Do you want to change your directory address? Y/N.\n')
