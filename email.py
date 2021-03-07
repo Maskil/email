@@ -8,10 +8,10 @@ import email.mime.application
 from email.mime.application import MIMEApplication
 from os.path import basename
 import requests
+import os
 
 apikey = 'o1zO8aOonyH3VdhZtmWEvBCXy2dkGSe0'  # https://developer.nytimes.com/ here to get your API, but I think this is available.
 
-print('Type mail() to start.')
 def add():
     label = {readN()['results'][0]['abstract']}
     notes['abstract'] = label
@@ -84,7 +84,7 @@ def readS():
 
 
 def addS():
-    print('Write your signature:' + '\n')
+    print('Write your signature. Type 1q1q to stop:' + '\n')
     signature[username] = {}
     global numS
     numS = 0
@@ -461,8 +461,24 @@ def mail():
                 time.sleep(timer_start_time)
                 smtpObj.sendmail('EMAIL@gmail.com', recipientList, msg.as_string())
                 smtpObj.quit()
-                answer = input("sent. Do you want to send it every day at the same time? Enter Y or N")
+                answer = input("Sent. Do you want to send it repeatedly?")
                 if (answer == "Y" or answer == "y"):
-                    time.sleep(86390)
+                    print('Answer in integers')
+                    hour = int(input('hour: '))
+                    minute = int(input('minute: '))
+                    print('Command received. Do not close the window.')
+                    time.sleep(hour*3600+minue*60)
                 else:
                     break
+dirct = os.getcwd()
+print('Your current directory is: ' + str(dirct))
+qs = ynAnswer('Do you want to change your directory address? Y/N.\n')
+if qs == 'Y':
+    sure = 'N'
+    while sure != 'Y':
+        dirct = input('New directory address: ')
+        sure = ynAnswer('Are you sure? Please type Y or N. ')
+os.chdir(dirct)
+d = dirct + '/'
+print(f"New directory {os.getcwd()} set")
+mail()
