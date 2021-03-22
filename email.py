@@ -437,7 +437,7 @@ def mail():
         print('Successfully created all attachments.')
     print("waiting to send")
     while True:
-        answer = input("Y: Send Now.\nT: set a time\nR: set a duration for repeating")
+        answer = input("Y: Send Now.\nT: set a time\nR: set a duration for repeating\n")
         if answer == "Y" or answer == "y":
             smtpObj.sendmail('EMAIL@gmail.com', recipientList, msg.as_string())
             smtpObj.quit()
