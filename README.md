@@ -4,11 +4,13 @@
 ```
 pip3 install requests
 pip3 install email==6.0.0a1
+pip3 install secure-smtplib
 ```
 - For Windows
 ```
 pip install requests
 pip install email==6.0.0a1
+pip install secure-smtplib
 ```
 2. Run python script
 - For Windows
