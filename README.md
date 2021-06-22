@@ -3,12 +3,12 @@
 - For Mac
 ```
 pip3 install requests
-pip3 install email
+pip3 install email==6.0.0a1
 ```
 - For Windows
 ```
 pip install requests
-pip install email
+pip install email==6.0.0a1
 ```
 2. Run python script
 - For Windows
